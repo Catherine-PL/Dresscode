@@ -7,7 +7,7 @@ import java.util.List;
 public abstract class View {
 
 	public enum Screen {
-	    MAINMENU, NEWGAMEMENU, GAMEPLAY, ENDGAME,
+	    MAINMENU, USERMENU, GAMEPLAY, ENDGAME,
 	    CREDITS, RULES,END}
 	
 	private static Screen view = Screen.MAINMENU;
