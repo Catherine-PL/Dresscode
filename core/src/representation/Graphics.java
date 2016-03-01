@@ -1,32 +1,16 @@
 package representation;
 
-import java.util.ArrayList;
-
-import representation.View.Screen;
-
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-
 
 
 public class Graphics  extends ApplicationAdapter {
 	
 	private MainMenu mainMenu = new MainMenu();
+	private UserMenu userMenu = new UserMenu();
 	
-	
-
 	@Override
 	public void create () {
-		mainMenu.init();
-
-		
-		
+		mainMenu.init();	
 	}
 
 	@Override
@@ -36,7 +20,9 @@ public class Graphics  extends ApplicationAdapter {
 			{
 				case MAINMENU:
 					mainMenu.batch();
-					//newGameMenu.init();
+			        break;
+				case USERMENU:
+					userMenu.batch();
 			        break;
 				case END:
 					System.exit(0);

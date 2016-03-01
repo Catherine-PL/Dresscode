@@ -1,5 +1,6 @@
 package base;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class UserManager {
@@ -7,24 +8,31 @@ public class UserManager {
 	protected HashMap<String,User> users= new HashMap<String,User>();
 	
 	
-	boolean createUser(String _id, String _password)
+	public int createUser(String _id, String _password, String _password2)
 	{
-	//TODO
-		return false;
+		if(!(_password.equals(_password2))) return 1;
+		if(users.containsKey(_id)) return 2;
+		users.put(_id,new User(_id,_password));
+		return 0;
 	}
-	boolean deleteUser(User user)
+	public  boolean deleteUser(User user)
 	{
 	//TODO
 		return false;
 	}
 	
-	boolean loginUser(String _id, String _password)
+	public int loginUser(String _id, String _password)
 	{
 	//TODO
-		return false;
+		//check if user exists
+		if(!(users.containsKey(_id))) return 2;
+		//check password
+		if(!(users.get(_id).getPassword().equals(_password))) return 1;
+		loggedUser=users.get(_id);
+		return 0;
 	}
 	
-	boolean logoutUser()
+	public boolean logoutUser()
 	{
 	//TODO
 		return false;

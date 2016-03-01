@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 
 
+import java.util.Arrays;
+
 import representation.View.Screen;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -47,9 +49,9 @@ public class MainMenu extends View implements InputProcessor
 	{
 		option=Selected.NONE;
 		menu=Selected.LOGIN;
-		texts= new StringBuilder[3];
-		textsbuffer = new String[3];
-		for (int i=0;i<3;i++)
+		texts= new StringBuilder[5];
+		textsbuffer = new String[5];
+		for (int i=0;i<5;i++)
 		{
 			texts[i]=new StringBuilder(16);
 		}
@@ -87,6 +89,8 @@ public class MainMenu extends View implements InputProcessor
 			if(i==1 && !textsbuffer[i].equals("your password")) font.draw(batch, toPassword(textsbuffer[i]), 265, screensizeY - (345+i*35));	
 			else font.draw(batch, textsbuffer[i], 265, screensizeY - (345+i*35));	
 		}
+		font.draw(batch, texts[3].toString(), 465, screensizeY - (345));
+		font.draw(batch, texts[4].toString(), 465, screensizeY - (345+1*35));
 		
 	}
 	void batchRegister()
@@ -98,6 +102,8 @@ public class MainMenu extends View implements InputProcessor
 			if(i>0 && !textsbuffer[i].equals("your password")) font.draw(batch, toPassword(textsbuffer[i]), 265, screensizeY - (345+i*35));	
 			else font.draw(batch, textsbuffer[i], 265, screensizeY - (345+i*35));	
 		}
+		font.draw(batch, texts[3].toString(), 465, screensizeY - (345));
+		font.draw(batch, texts[4].toString(), 465, screensizeY - (345+1*35));
 		
 	}
 	
@@ -142,6 +148,14 @@ public class MainMenu extends View implements InputProcessor
         return false;
     }
 
+    public void refreshTexts()
+    {
+    	texts[4]=new StringBuilder(16);
+		texts[3]=new StringBuilder(16);
+		texts[0]=(new StringBuilder(16)).append("your username");
+		texts[1]=(new StringBuilder(16)).append("your password");
+		texts[2]=(new StringBuilder(16)).append("your password");
+    }
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
     	if(button == Buttons.LEFT){
@@ -150,18 +164,44 @@ public class MainMenu extends View implements InputProcessor
 
 			if(X<262 && X>169 && Y<282 && Y>250)
 			{
+				refreshTexts();
 				menu=Selected.REGISTER;
 				back=new Texture(Gdx.files.internal("backregister.png"));
 			}
 			else if(X<262 && X>169 && Y<250 && Y>214)
 			{
+				refreshTexts();
 				menu=Selected.LOGIN;
 				back=new Texture(Gdx.files.internal("backlogin.png"));
 			}
 			else if(X<355 && X>261 && Y<511 && Y>491)
 			{
 				option=Selected.CONTINUE;
-				//TODO login or register action
+				texts[4]=new StringBuilder(16);
+				texts[3]=new StringBuilder(16);
+				if(menu.equals(Selected.LOGIN))
+				{
+					//TODO login action
+					int login=View.getUserManager().loginUser(texts[0].toString(),texts[1].toString());
+					if (login==0) 
+					{
+						View.setView(Screen.USERMENU);
+						return true;
+					}
+					else if(login==1) texts[4]=(new StringBuilder(16)).append("Wrong password");
+					else if(login==2) texts[3]=(new StringBuilder(16)).append("There is no user with that name");
+				}
+				else
+				{
+					int register=View.getUserManager().createUser(texts[0].toString(),texts[1].toString(),texts[2].toString());
+					if (register==0) 
+					{
+						texts[3]=(new StringBuilder(16)).append("Registration successful");
+						return true;
+					}
+					else if(register==1) texts[4]=(new StringBuilder(16)).append("Given passwords don't match");
+					else if(register==2) texts[3]=(new StringBuilder(16)).append("This username already exists");
+				}
 			}
 			else if(X>262 && X<400 && Y<369 && Y>334)
 			{
