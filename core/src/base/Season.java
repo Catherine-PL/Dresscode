@@ -2,8 +2,9 @@ package base;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.Serializable;
 
-public class Season {
+public class Season implements Serializable {
 	private String id;
 	private String description;
 	private int wind;

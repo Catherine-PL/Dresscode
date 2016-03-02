@@ -11,12 +11,12 @@ public abstract class View {
 	    MAINMENU, USERMENU, GAMEPLAY, ENDGAME,
 	    CREDITS, RULES,END}
 	private static UserManager manager = new UserManager();
-	
 	private static Screen view = Screen.MAINMENU;
 	final static int screensizeX=1300; 
 	final static int screensizeY=680; 
 	
-	public void init(){}
+	public void init()
+	{}
 	public void batch(){}
 	
 	public static Screen setView(Screen _view)
@@ -31,6 +31,11 @@ public abstract class View {
 	}
 	public static UserManager getUserManager()
 	{
+		return manager;
+	}
+	public static UserManager setUserManager(UserManager _manager)
+	{
+		manager=_manager;
 		return manager;
 	}
 	

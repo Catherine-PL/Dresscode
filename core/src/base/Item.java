@@ -1,8 +1,9 @@
 package base;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Item implements Wearable{
+public class Item implements Wearable, Serializable{
 	private String id;
 	private String description;
 	private int rate;

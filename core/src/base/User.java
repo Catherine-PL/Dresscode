@@ -3,9 +3,12 @@ package base;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeMap;
+import java.io.Serializable;
+import java.nio.file.Path;
 
-public class User implements Managable{
+public class User implements Managable,Serializable{
 
+	private Path path;
 	private String id;
 	private String password;
 	protected HashMap<String,Item> items= new HashMap<String,Item>();

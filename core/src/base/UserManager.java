@@ -2,8 +2,9 @@ package base;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.io.Serializable;
 
-public class UserManager {
+public class UserManager implements Serializable{
 	private User loggedUser;
 	protected HashMap<String,User> users= new HashMap<String,User>();
 	

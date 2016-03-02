@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import representation.View.Screen;
+import base.Serializer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -47,6 +48,7 @@ public class MainMenu extends View implements InputProcessor
 	
 	public void init()
 	{
+		View.setUserManager(Serializer.deserialzeUserManager());
 		option=Selected.NONE;
 		menu=Selected.LOGIN;
 		texts= new StringBuilder[5];

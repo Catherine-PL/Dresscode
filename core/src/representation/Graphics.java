@@ -1,5 +1,7 @@
 package representation;
 
+import base.Serializer;
+
 import com.badlogic.gdx.ApplicationAdapter;
 
 
@@ -10,7 +12,8 @@ public class Graphics  extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		mainMenu.init();	
+		mainMenu.init();
+		userMenu.init();
 	}
 
 	@Override
@@ -34,6 +37,7 @@ public class Graphics  extends ApplicationAdapter {
 //TODO na razie mnie to nie interesuje	
 	public void dispose() {
 	      // dispose of all the native resources
+			Serializer.serializeUserManager(View.getUserManager());
 		
 	   }
 

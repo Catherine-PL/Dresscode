@@ -1,8 +1,9 @@
 package base;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Category {
+public class Category implements Serializable {
 	private String id;
 	private String description;
 	private Category superCategory;
